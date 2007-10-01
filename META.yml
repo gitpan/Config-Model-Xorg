@@ -1,6 +1,6 @@
 ---
 name: Config-Model-Xorg
-version: 0.502
+version: 0.503
 author:
   - Dominique Dumont (ddumont at cpan dot org)
 abstract: Configuration model for xorg.conf
@@ -11,6 +11,9 @@ requires:
 recommends:
   Config::Model::CursesUI: 0
 provides:
+  Config::Model::Xorg:
+    file: lib/Config/Model/Xorg.pm
+    version: 1.001
   Config::Model::Xorg::Read:
     file: lib/Config/Model/Xorg/Read.pm
   Config::Model::Xorg::Write:
