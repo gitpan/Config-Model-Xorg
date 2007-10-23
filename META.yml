@@ -1,12 +1,14 @@
 ---
 name: Config-Model-Xorg
-version: 0.503
+version: 0.504
 author:
   - Dominique Dumont (ddumont at cpan dot org)
 abstract: Configuration model for xorg.conf
 license: lgpl
+resources:
+  license: http://opensource.org/licenses/artistic-license.php
 requires:
-  Config::Model: 0.610
+  Config::Model: 0.614
   Log::Log4perl: 0
 recommends:
   Config::Model::CursesUI: 0
@@ -18,4 +20,7 @@ provides:
     file: lib/Config/Model/Xorg/Read.pm
   Config::Model::Xorg::Write:
     file: lib/Config/Model/Xorg/Write.pm
-generated_by: Module::Build version 0.26
+generated_by: Module::Build version 0.2808
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.2.html
+  version: 1.2
