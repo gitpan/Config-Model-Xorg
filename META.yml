@@ -1,6 +1,6 @@
 ---
 name: Config-Model-Xorg
-version: 0.505
+version: 0.506
 author:
   - Dominique Dumont (ddumont at cpan dot org)
 abstract: Configuration model for xorg.conf
@@ -15,7 +15,7 @@ recommends:
 provides:
   Config::Model::Xorg:
     file: lib/Config/Model/Xorg.pm
-    version: 1.001
+    version: 1.002
   Config::Model::Xorg::Read:
     file: lib/Config/Model/Xorg/Read.pm
   Config::Model::Xorg::Write:
