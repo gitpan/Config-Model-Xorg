@@ -1,7 +1,7 @@
 # $Author: ddumont $
-# $Date: 2007/06/07 16:46:47 $
+# $Date: 2008/01/23 11:12:16 $
 # $Name:  $
-# $Revision: 1.3 $
+# $Revision: 1.5 $
 
 #    Copyright (c) 2005,2006 Dominique Dumont.
 #
@@ -29,6 +29,10 @@ use Carp ;
 use IO::File ;
 use Log::Log4perl;
 use Data::Dumper ;
+
+use vars qw($VERSION) ;
+
+$VERSION = sprintf "%d.%03d", q$Revision: 1.5 $ =~ /(\d+)\.(\d+)/;
 
 my $logger = Log::Log4perl::get_logger(__PACKAGE__);
 
@@ -213,7 +217,7 @@ sub parse_option {
 	# dont' work for ServerFlags
 	$logger->debug( "obj ",$obj->name, " ($line) load option '$opt' ");
 	my $opt_obj = $obj->fetch_element("Option")->fetch_element($opt) ;
-	$opt_obj->store ( @args  ? $args[0] : 1 ) ;
+	$opt_obj->store ( @args  ? $args[0] : 1 ) if defined $opt_obj ;
     }
 }
 
@@ -395,8 +399,12 @@ sub parse_section {
     # first get the identifier and create the object. 
     if ($has_id) {
 	my $id_rr =  delete $section_data->{Identifier}
-	          || delete $section_data->{Depth}
-	          || die "can't find identifier for ",$obj->name ;
+	          || delete $section_data->{Depth} ;
+	if (not defined $id_rr) {
+	    $logger->debug( "parse_section can't find identifier for ",$obj->name );
+	    return ;
+	}
+
 
 	my ($line,$id) = @{$id_rr->[0]}  ;
 	$logger->debug( "parse_section $line: found id '$id' for '",
