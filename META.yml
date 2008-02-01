@@ -1,6 +1,6 @@
 ---
 name: Config-Model-Xorg
-version: 0.507
+version: 0.508
 author:
   - Dominique Dumont (ddumont at cpan dot org)
 abstract: Configuration model for xorg.conf
