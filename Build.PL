@@ -1,7 +1,7 @@
 # $Author: ddumont $
-# $Date: 2008/02/11 11:53:03 $
+# $Date: 2008/02/27 12:32:07 $
 # $Name:  $
-# $Revision: 1.12 $
+# $Revision: 1.15 $
 
 #    Copyright (c) 2007-2008 Dominique Dumont.
 #
@@ -34,7 +34,6 @@ use warnings FATAL => qw(all) ;
 use strict ;
 
 use Data::Dumper ;
-$Data::Dumper::Terse = 1 ;
 
 use Config ;
 use Cwd ;
@@ -46,6 +45,11 @@ sub generate {
     print "Generating $out_file\n";
     open (KBDOPT, "> $out_file") || die "can't open $out_file to write:$!" ;
     print KBDOPT "# Generated file. Do not edit\n\n" ;
+
+    # use local to avoid breaking Module::Build > 0.2808_01
+    local $Data::Dumper::Terse = 1 ;
+    # see http://groups.google.com/group/perl.module.build/browse_thread/thread/c8065052b2e0d741
+
     print KBDOPT Dumper ( $data ) ;
     close KBDOPT ;
     $builder->add_to_cleanup($out_file) ;
@@ -66,7 +70,7 @@ my $build = Module::Build->new
   (
    module_name   => 'Config::Model::Xorg',
    license       => 'lgpl',
-   dist_version  => 0.509 ,
+   dist_version  => '0.510' ,
    dist_author   => "Dominique Dumont (ddumont at cpan dot org)",
    dist_abstract => "Configuration model for xorg.conf",
    requires      => {
@@ -76,7 +80,7 @@ my $build = Module::Build->new
    recommends    => {
 		     'Config::Model::CursesUI' => 0,
 		    },
-   add_to_cleanup => [qw/wr_test/] ,
+   add_to_cleanup => [qw/wr_test/] 
   );
 
 
