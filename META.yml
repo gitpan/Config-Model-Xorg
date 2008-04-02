@@ -1,9 +1,9 @@
 ---
 name: Config-Model-Xorg
-version: 0.510
+version: 0.511
 author:
   - Dominique Dumont (ddumont at cpan dot org)
-abstract: Configuration model for xorg.conf
+abstract: Xorg configuration tool based on Config::Model
 license: lgpl
 resources:
   license: http://opensource.org/licenses/lgpl-license.php
@@ -12,6 +12,7 @@ requires:
   Log::Log4perl: 0
 recommends:
   Config::Model::CursesUI: 0
+  Config::Model::TkUI: 0
 provides:
   Config::Model::Xorg:
     file: lib/Config/Model/Xorg.pm

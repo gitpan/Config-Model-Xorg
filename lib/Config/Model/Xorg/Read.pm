@@ -1,6 +1,6 @@
 # $Author: ddumont $
-# $Date: 2008/01/23 11:12:16 $
-# $Name:  $
+# $Date: 2008-01-23 11:12:16 $
+# $Name: not supported by cvs2svn $
 # $Revision: 1.5 $
 
 #    Copyright (c) 2005,2006 Dominique Dumont.
