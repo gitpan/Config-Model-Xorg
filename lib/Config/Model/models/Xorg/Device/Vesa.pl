@@ -1,9 +1,9 @@
 # $Author: ddumont $
 # $Date: 2007-10-23 16:18:25 $
 # $Name: not supported by cvs2svn $
-# $Revision: 1.3 $
+# $Revision: 1.2 $
 
-#    Copyright (c) 2005,2006,2008 Dominique Dumont.
+#    Copyright (c) 2008 Dominique Dumont.
 #
 #    This file is part of Config-Xorg.
 #
@@ -22,38 +22,24 @@
 #    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
 
 
-# Model for Mouse driver. Where's the doc ???
+# Model for Vesa driver 
 
 [
  [
-  name => "Xorg::InputDevice::MouseOpt",
+  name => "Xorg::Device::Nvidia",
   'element' 
   => [ 
-      'Device'          => { type   => 'leaf' ,
-			     value_type => 'uniline',
-			   },
-      'Protocol'        => { type   => 'leaf',
-			     value_type => 'enum',
-			     choice => [qw!auto PS/2 ImPS/2 IntelliMouse!] ,
-			   },
-      'Emulate3Buttons' => { type       => 'leaf',
-			     value_type => 'boolean',
-			     built_in   => 0,
-			   },
-      'ZAxisMapping'    => {type   => 'leaf' ,
-			    value_type => 'uniline',
-			   },
-      'SendCoreEvents'  => { type       => 'leaf',
-			     value_type => 'boolean',
-			   },
-      "Buttons"         => {type   => 'leaf' ,
-			    value_type => 'uniline',
-			   },
+      ['ShadowFB', 'ModeSetClearScreen']
+      => { type       => 'leaf',
+	   value_type => 'boolean',
+	   built_in   => 1,
+	 },
      ],
 
   'description' 
   => [
-
+      'ShadowFB'        => 'Enable or disable use of the shadow framebuffer layer. This option is recommended for performance reasons.',
+      'ModeSetClearScreen' => 'Clear the screen on mode set. Some BIOSes seem to be broken in the sense that the newly set video mode is bogus if they are asked to clear the screen during mode setting. If you experience problems try to turn this option off.',
      ],
  ]
 ];
