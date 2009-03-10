@@ -1,9 +1,8 @@
 # $Author: ddumont $
 # $Date: 2008-02-26 17:37:39 $
-# $Name: not supported by cvs2svn $
-# $Revision: 1.7 $
+# $Revision$
 
-#    Copyright (c) 2005-2008 Dominique Dumont.
+#    Copyright (c) 2005-2009 Dominique Dumont.
 #
 #    This file is part of Config-Xorg.
 #
@@ -33,7 +32,7 @@ use File::Path ;
 
 use vars qw($VERSION) ;
 
-$VERSION = sprintf "%d.%03d", q$Revision: 1.7 $ =~ /(\d+)\.(\d+)/;
+$VERSION = sprintf "1.%04d", q$Revision: 711 $ =~ /(\d+)/;
 
 my $logger = Log::Log4perl::get_logger(__PACKAGE__);
 
@@ -54,7 +53,7 @@ sub write {
 
     my $file = "$dir/xorg.conf" ;
 
-    $logger->warn( __PACKAGE__." write: writing config file $file\n");
+    $logger->info( __PACKAGE__." write: writing config file $file\n");
 
     open (CONF,"> $file ") || die __PACKAGE__," write: can't open $file:$!";
 
@@ -119,6 +118,10 @@ my %dispatch_leaf
      'Xorg::Device' => \&wr_std_leaf ,
      'Xorg::Device::Radeon' => \&wr_std_options ,
      'Xorg::Device::Nvidia' => \&wr_std_options ,
+     'Xorg::Device::Fglrx' => \&wr_std_options ,
+     'Xorg::Device::Vesa' => \&wr_std_options ,
+     'Xorg::Extensions' => \&wr_std_options ,
+     'Xorg::Extensions::Option' => \&wr_std_options ,
      'Xorg::Monitor' => \&wr_std_leaf ,
      'Xorg::Monitor::Option' => \&wr_std_options ,
      'Xorg::Monitor::Mode' => \&push_value ,
@@ -298,6 +301,7 @@ sub wr_device_kbd_autorepeat {
 my %dispatch_node 
   = ( 
      'Xorg' => 1 ,
+     'Xorg::Extensions' => \&wr_section,
      'Xorg::Files' => \&wr_section,
      'Xorg::Module' => \&wr_section,
      'Xorg::InputDevice' => \&wr_section,

@@ -1,86 +1,101 @@
-# $Author: ddumont $
-# $Date: 2007-10-23 16:18:25 $
-# $Name: not supported by cvs2svn $
-# $Revision: 1.3 $
-
-#    Copyright (c) 2005,2006 Dominique Dumont.
-#
-#    This file is part of Config-Xorg.
-#
-#    Config-Xorg is free software; you can redistribute it and/or
-#    modify it under the terms of the GNU Lesser Public License as
-#    published by the Free Software Foundation; either version 2.1 of
-#    the License, or (at your option) any later version.
-#
-#    Config-Xorg is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-#    Lesser Public License for more details.
-#
-#    You should have received a copy of the GNU Lesser Public License
-#    along with Config-Model; if not, write to the Free Software
-#    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
-
-
-# This model was created from xorg.conf(5x) man page from xorg
-# project (http://www.x.org/).
-
-# Model for Device section of xorg.conf
-
 [
- [
-  name => "Xorg::Device",
-  'element' 
-  => [ 
-      'Driver'         => { type       => 'leaf',
-			    value_type => 'enum',
-			    mandatory  => 1 ,
-			    # obviously, some more work is needed here
-			    choice => [qw/radeon nvidia vesa/] ,
-			  },
-
-      'BusID'          => { type       => 'leaf',
-			    value_type => 'uniline',
-			    warp => { follow => '! MultiHead',
-				      rules => { 
-						1 => { mandatory  => 1 } 
-					       }
-				    }
-			  },
-
-      'Screen'         => { type       => 'leaf',
-			    value_type => 'integer',
-			    warp => { follow => '! MultiHead',
-				      rules => { 
-						1 => { mandatory  => 1 } 
-					       }
-				    }
-			  },
-
-      'Option'
-      => { type     => 'warped_node',
-	   follow   => '- Driver',
-	   'rules' 
-	   => { 'radeon' => { config_class_name => 'Xorg::Device::Radeon' },
-		'nvidia' => { config_class_name => 'Xorg::Device::Nvidia' },
-		'vesa'   => { config_class_name => 'Xorg::Device::Vesa' },
-	      }
-	 },
-
-      [qw/Chipset Ramdac DacSpeed/]
-                       => { type       => 'leaf',
-			    value_type => 'uniline',
-			  },
-
-
-     ],
-
-  # need deep knowledge to set up these options
-  permission => [ [qw/Chipset Ramdac DacSpeed/] => 'advanced' ] ,
-
-  'description' 
-  => [
-      'Driver' => 'name of the driver to use for this graphics device',
-     ],
- ]
-];
+          {
+            'class_description' => 'Driver-independent entries and Options',
+            'name' => 'Xorg::Device',
+            'element' => [
+                           'Driver',
+                           {
+                             'value_type' => 'enum',
+                             'mandatory' => 1,
+                             'type' => 'leaf',
+                             'description' => 'name of the driver to use for this graphics device',
+                             'choice' => [
+                                           'radeon',
+                                           'nvidia',
+                                           'vesa',
+                                           'fglrx'
+                                         ]
+                           },
+                           'BusID',
+                           {
+                             'value_type' => 'uniline',
+                             'warp' => {
+                                         'follow' => {
+                                                       'f1' => '! MultiHead'
+                                                     },
+                                         'rules' => [
+                                                      '$f1 eq \'1\'',
+                                                      {
+                                                        'mandatory' => 1
+                                                      }
+                                                    ]
+                                       },
+                             'type' => 'leaf',
+                             'description' => "This specifies the bus location of the graphics card. For PCI/AGP cards, the bus-id string has the form
+PCI:bus:device:function (e.g., \x{201c}PCI:1:0:0\x{201d} might be appropriate for an AGP card). This field is usually optional in single-head configurations when using the primary graphics card. In multi-head configurations, or when using a secondary graphics card in a single-head configuration, this entry is mandatory. Its main purpose is to make an unambiguous connection between the device section and the hardware it is representing. This information can usually be found by running the Xorg server with the -scanpci command line option."
+                           },
+                           'Screen',
+                           {
+                             'value_type' => 'integer',
+                             'warp' => {
+                                         'follow' => {
+                                                       'f1' => '! MultiHead'
+                                                     },
+                                         'rules' => [
+                                                      '$f1 eq \'1\'',
+                                                      {
+                                                        'mandatory' => 1
+                                                      }
+                                                    ]
+                                       },
+                             'type' => 'leaf',
+                             'description' => 'his option is mandatory for cards where a single PCI entity can drive more than one display (i.e., multiple CRTCs sharing a single graphics accelerator and video memory). One Device section is required for each head, and this parameter determines which head each of the Device sections applies to. The legal values of number range from 0 to one less than the total number of heads per entity. Most drivers require that the primary screen (0) be present.'
+                           },
+                           'Chipset',
+                           {
+                             'value_type' => 'uniline',
+                             'experience' => 'advanced',
+                             'type' => 'leaf'
+                           },
+                           'Ramdac',
+                           {
+                             'value_type' => 'uniline',
+                             'experience' => 'advanced',
+                             'type' => 'leaf'
+                           },
+                           'DacSpeed',
+                           {
+                             'value_type' => 'uniline',
+                             'experience' => 'advanced',
+                             'type' => 'leaf'
+                           },
+                           'Option',
+                           {
+                             'follow' => {
+                                           'f1' => '- Driver'
+                                         },
+                             'type' => 'warped_node',
+                             'rules' => [
+                                          '$f1 eq \'radeon\'',
+                                          {
+                                            'config_class_name' => 'Xorg::Device::Radeon'
+                                          },
+                                          '$f1 eq \'vesa\'',
+                                          {
+                                            'config_class_name' => 'Xorg::Device::Vesa'
+                                          },
+                                          '$f1 eq \'nvidia\'',
+                                          {
+                                            'config_class_name' => 'Xorg::Device::Nvidia'
+                                          },
+                                          '$f1 eq \'fglrx\'',
+                                          {
+                                            'config_class_name' => 'Xorg::Device::Fglrx'
+                                          }
+                                        ],
+                             'description' => 'Option flags may be specified in the Device sections. These include driver-specific options and driver-independent options.'
+                           }
+                         ]
+          }
+        ]
+;
