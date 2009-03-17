@@ -1,6 +1,6 @@
 ---
 name: Config-Model-Xorg
-version: 1.101
+version: 1.102
 author:
   - Dominique Dumont (ddumont at cpan dot org)
 abstract: Xorg configuration tool based on Config::Model
@@ -16,13 +16,13 @@ recommends:
 provides:
   Config::Model::Xorg:
     file: lib/Config/Model/Xorg.pm
-    version: 1.101
+    version: 1.102
   Config::Model::Xorg::Read:
     file: lib/Config/Model/Xorg/Read.pm
-    version: 1.0711
+    version: 1.0899
   Config::Model::Xorg::Write:
     file: lib/Config/Model/Xorg/Write.pm
-    version: 1.0711
+    version: 1.0899
 generated_by: Module::Build version 0.3
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.2.html

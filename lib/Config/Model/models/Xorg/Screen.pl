@@ -5,7 +5,6 @@
                            'Device',
                            {
                              'value_type' => 'reference',
-                             'mandatory' => 1,
                              'type' => 'leaf',
                              'description' => 'specifies the Device section to be used for this
        screen. This is what ties a specific graphics card to a
@@ -15,7 +14,6 @@
                            'Monitor',
                            {
                              'value_type' => 'reference',
-                             'mandatory' => 1,
                              'type' => 'leaf',
                              'description' => 'specifies which monitor description is to be used
               for this screen. If a Monitor name is not specified, a
@@ -30,34 +28,6 @@
                              'type' => 'leaf',
                              'description' => 'specifies an optional Xv video adaptor
               description to be used with this screen.'
-                           },
-                           'DefaultDepth',
-                           {
-                             'value_type' => 'reference',
-                             'type' => 'leaf',
-                             'description' => 'specifies which color depth the server should
-              use by default.  The -depth command line option can be
-              used to override this. If neither is specified, the
-              default depth is driver-specific, but in most cases is
-              8.',
-                             'refer_to' => '- Display'
-                           },
-                           'DefaultFbBpp',
-                           {
-                             'value_type' => 'uniline',
-                             'type' => 'leaf',
-                             'description' => 'specifies which framebuffer layout to use by
-              default.  The -fbbpp command line option can be used to
-              override this.  In most cases the driver will chose the
-              best default value for this.  The only case where there
-              is even a choice in this value is for depth 24, where
-              some hardware supports both a packed 24 bit framebuffer
-              layout and a sparse 32 bit framebuffer layout.'
-                           },
-                           'Option',
-                           {
-                             'type' => 'node',
-                             'config_class_name' => 'Xorg::Screen::Option'
                            },
                            'Display',
                            {
@@ -78,6 +48,30 @@
               that can be specified here fall back to their
               defaults.',
                              'index_type' => 'integer'
+                           },
+                           'Option',
+                           {
+                             'type' => 'node',
+                             'config_class_name' => 'Xorg::Screen::Option'
+                           },
+                           'DefaultDepth',
+                           {
+                             'value_type' => 'reference',
+                             'type' => 'leaf',
+                             'description' => 'specifies which color depth the server should use by default. The -depth command line option can be used to override this. If neither is specified, the default depth is driver-specific, but in most cases is 8.',
+                             'refer_to' => '- Display'
+                           },
+                           'DefaultFbBpp',
+                           {
+                             'value_type' => 'uniline',
+                             'type' => 'leaf',
+                             'description' => 'specifies which framebuffer layout to use by
+              default.  The -fbbpp command line option can be used to
+              override this.  In most cases the driver will chose the
+              best default value for this.  The only case where there
+              is even a choice in this value is for depth 24, where
+              some hardware supports both a packed 24 bit framebuffer
+              layout and a sparse 32 bit framebuffer layout.'
                            }
                          ]
           }

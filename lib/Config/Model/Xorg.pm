@@ -1,6 +1,6 @@
-# $Author$
-# $Date$
-# $Revision$
+# $Author: ddumont $
+# $Date: 2009-03-17 14:12:03 +0100 (Tue, 17 Mar 2009) $
+# $Revision: 899 $
 
 #    Copyright (c) 2005-2009 Dominique Dumont.
 #
@@ -43,7 +43,7 @@ Log::Log4perl::init($log4perl_conf) unless Log::Log4perl->initialized ;
 
 use vars qw($VERSION) ;
 
-$VERSION = '1.101' ;
+$VERSION = '1.102' ;
 
 =head1 NAME
 
