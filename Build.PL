@@ -1,6 +1,6 @@
 # $Author: ddumont $
-# $Date: 2009-03-19 13:27:00 +0100 (Thu, 19 Mar 2009) $
-# $Revision: 903 $
+# $Date: 2009-06-23 13:41:22 +0200 (Tue, 23 Jun 2009) $
+# $Revision: 979 $
 
 #    Copyright (c) 2007-2009 Dominique Dumont.
 #
@@ -73,7 +73,7 @@ my $build = Module::Build->new
    dist_author   => "Dominique Dumont (ddumont at cpan dot org)",
    dist_abstract => "Xorg configuration tool based on Config::Model",
    requires      => {
-		     'Config::Model'   => '0.633',
+		     'Config::Model'   => '0.637',
 		     'Log::Log4perl'   => 0 ,
 		    },
    recommends    => {

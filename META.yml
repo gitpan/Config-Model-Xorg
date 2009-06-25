@@ -1,6 +1,6 @@
 ---
 name: Config-Model-Xorg
-version: 1.103
+version: 1.104
 author:
   - Dominique Dumont (ddumont at cpan dot org)
 abstract: Xorg configuration tool based on Config::Model
@@ -8,7 +8,7 @@ license: lgpl
 resources:
   license: http://opensource.org/licenses/lgpl-license.php
 requires:
-  Config::Model: 0.633
+  Config::Model: 0.637
   Log::Log4perl: 0
 recommends:
   Config::Model::CursesUI: 0
@@ -16,14 +16,14 @@ recommends:
 provides:
   Config::Model::Xorg:
     file: lib/Config/Model/Xorg.pm
-    version: 1.103
+    version: 1.104
   Config::Model::Xorg::Read:
     file: lib/Config/Model/Xorg/Read.pm
     version: 1.0899
   Config::Model::Xorg::Write:
     file: lib/Config/Model/Xorg/Write.pm
-    version: 1.0899
-generated_by: Module::Build version 0.3
+    version: 1.0979
+generated_by: Module::Build version 0.33
 meta-spec:
-  url: http://module-build.sourceforge.net/META-spec-v1.2.html
-  version: 1.2
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4

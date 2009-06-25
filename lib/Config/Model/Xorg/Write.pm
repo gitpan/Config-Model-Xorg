@@ -1,6 +1,6 @@
 # $Author: ddumont $
-# $Date: 2009-03-17 14:12:03 +0100 (Tue, 17 Mar 2009) $
-# $Revision: 899 $
+# $Date: 2009-06-23 13:41:22 +0200 (Tue, 23 Jun 2009) $
+# $Revision: 979 $
 
 #    Copyright (c) 2005-2009 Dominique Dumont.
 #
@@ -32,7 +32,7 @@ use File::Path ;
 
 use vars qw($VERSION) ;
 
-$VERSION = sprintf "1.%04d", q$Revision: 899 $ =~ /(\d+)/;
+$VERSION = sprintf "1.%04d", q$Revision: 979 $ =~ /(\d+)/;
 
 my $logger = Log::Log4perl::get_logger(__PACKAGE__);
 
@@ -73,7 +73,7 @@ sub wr_module {
 
 sub wr_std_options {
     my ($scanner, $data_r ,$node,$element_name,$index, $leaf_object,$v) = @_ ;
-    my $b_in = $leaf_object->built_in ;
+    my $b_in = $leaf_object->upstream_default ;
     if ( defined $v && (   (not defined $b_in) 
 			|| (defined $b_in && $v && $v ne $b_in) )
        ) {
