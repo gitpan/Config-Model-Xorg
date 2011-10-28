@@ -1,29 +1,29 @@
 ---
-name: Config-Model-Xorg
-version: 1.104
+abstract: 'Xorg configuration model for Config::Model'
 author:
-  - Dominique Dumont (ddumont at cpan dot org)
-abstract: Xorg configuration tool based on Config::Model
+  - 'Dominique Dumont'
+build_requires:
+  Module::Build: 0.34
+  Test::Exception: 0
+  Test::More: 0
+configure_requires:
+  Module::Build: 0.34
+dynamic_config: 0
+generated_by: 'Dist::Zilla version 4.300002, CPAN::Meta::Converter version 2.112621'
 license: lgpl
-resources:
-  license: http://opensource.org/licenses/lgpl-license.php
-requires:
-  Config::Model: 0.637
-  Log::Log4perl: 0
-recommends:
-  Config::Model::CursesUI: 0
-  Config::Model::TkUI: 0
-provides:
-  Config::Model::Xorg:
-    file: lib/Config/Model/Xorg.pm
-    version: 1.104
-  Config::Model::Xorg::Read:
-    file: lib/Config/Model/Xorg/Read.pm
-    version: 1.0899
-  Config::Model::Xorg::Write:
-    file: lib/Config/Model/Xorg/Write.pm
-    version: 1.0979
-generated_by: Module::Build version 0.33
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
   version: 1.4
+name: Config-Model-Xorg
+recommends:
+  Config::Model::CursesUI: 0
+  Config::Model::TkUI: 0
+requires:
+  Config::Model: 1.260
+  Exception::Class: 0
+  Log::Log4perl: 1.11
+resources:
+  bugtracker: http://rt.cpan.org/NoAuth/Bugs.html?Dist=Config-Model-Xorg
+  homepage: http://config-model.wiki.sourceforge.net
+  repository: http://config-model.hg.sourceforge.net:8000/hgroot/config-model/config-model-xorg
+version: 1.105

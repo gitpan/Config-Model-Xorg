@@ -1,0 +1,35 @@
+{
+   "abstract" : "Xorg configuration tool based on Config::Model",
+   "author" : [
+      "Dominique Dumont (ddumont at cpan dot org)"
+   ],
+   "dynamic_config" : 0,
+   "generated_by" : "Module::Build version 0.38, CPAN::Meta::Converter version 2.112621",
+   "license" : [
+      "open_source"
+   ],
+   "meta-spec" : {
+      "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+      "version" : "2"
+   },
+   "name" : "Config-Model-Xorg",
+   "prereqs" : {
+      "runtime" : {
+         "recommends" : {
+            "Config::Model::CursesUI" : 0,
+            "Config::Model::TkUI" : 0
+         },
+         "requires" : {
+            "Config::Model" : "0.637",
+            "Log::Log4perl" : 0
+         }
+      }
+   },
+   "release_status" : "stable",
+   "resources" : {
+      "license" : [
+         "http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt"
+      ]
+   },
+   "version" : "0"
+}

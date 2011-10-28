@@ -1,35 +1,31 @@
-# $Author: ddumont $
-# $Date: 2009-06-25 17:12:02 +0200 (Thu, 25 Jun 2009) $
-# $Revision: 989 $
+#
+# This file is part of Config-Model-Xorg
+#
+# This software is Copyright (c) 2011 by Dominique Dumont.
+#
+# This is free software, licensed under:
+#
+#   The GNU Lesser General Public License, Version 2.1, February 1999
+#
 
 package Config::Model::Xorg ;
-
-use Config::Model ;
-use Log::Log4perl ;
-
-my $log4perl_conf_file = '/etc/log4config-model.conf' ;
-my $fallback_conf = << 'EOC';
-log4perl.logger.ConfigModel=WARN, A1
-log4perl.appender.A1=Log::Dispatch::File
-log4perl.appender.A1.filename=/tmp/ConfigModel.log
-log4perl.appender.A1.mode=append
-log4perl.appender.A1.layout=Log::Log4perl::Layout::SimpleLayout
-EOC
-
-my $log4perl_conf = -e $log4perl_conf_file ? $log4perl_conf_file
-                  :                          \$fallback_conf ;
-
-Log::Log4perl::init($log4perl_conf) unless Log::Log4perl->initialized ;
+{
+  $Config::Model::Xorg::VERSION = '1.105';
+}
 
 # dummy package so CPAN can collect information regarding this module
 
-use vars qw($VERSION) ;
+# use vars qw($VERSION) ;
 
-$VERSION = '1.104' ;
+# $VERSION = '1.104' ;
 
 =head1 NAME
 
 Config::Model::Xorg - Xorg configuration model for Config::Model
+
+=head1 VERSION
+
+version 1.105
 
 =head1 SYNOPSIS
 
@@ -70,59 +66,6 @@ http://search.cpan.org/dist/Config-Model/TermUI.pm#USER_COMMAND_SYNTAX
 
 =head1 CONSTRUCTOR
 
-=head2 new ()
-
-Returns a Config::Model::Xorg object. This object will load Xorg
-configuration model and C<xorg.conf> data.
-
-=cut
-
-sub new {
-    my $type = shift ;
-
-    my $model = Config::Model -> new() ;
-
-    my $inst = $model->instance (root_class_name => 'Xorg' ,
-				 instance_name   => 'xorg config' ,
-				);
-
-    my $root = $inst -> config_root ;
-
-    my $self = { model => $model,
-		 root => $root ,
-	       } ;
-    bless $self,$type ;
-}
-
-=head1 Methods
-
-=head2 root
-
-Return Xorg root node. I.e. a L<Config::Model::Node> object.
-
-=cut
-
-sub root {
-    my $self = shift;
-    return $self->root ;
-}
-
-=head2 check
-
-Check if Xorg configuration data is correct. Return 1 if yes.
-Raises an exception if some error is found.
-
-=cut
-
-sub check {
-    my $self = shift ;
-
-    # this will exit in case of error
-    my $str = $self->{root} -> dump_tree () ;
-
-    print "xorg config is fine\n";
-    return 1;
-}
 
 =head1 AUTHOR
 
@@ -151,4 +94,3 @@ Dominique Dumont, (ddumont at cpan dot org)
 =head1 SEE ALSO
 
 L<Config::Model>,
-

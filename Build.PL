@@ -1,8 +1,13 @@
-# $Author: ddumont $
-# $Date: 2009-06-23 13:41:22 +0200 (Tue, 23 Jun 2009) $
-# $Revision: 979 $
-
-#    Copyright (c) 2007-2009 Dominique Dumont.
+#
+# This file is part of Config-Model-Xorg
+#
+# This software is Copyright (c) 2011 by Dominique Dumont.
+#
+# This is free software, licensed under:
+#
+#   The GNU Lesser General Public License, Version 2.1, February 1999
+#
+#    Copyright (c) 2007-2011 Dominique Dumont.
 #
 #    This file is part of Config-Model-Xorg.
 #
@@ -71,16 +76,37 @@ my $build = Module::Build->new
    module_name   => 'Config::Model::Xorg',
    license       => 'lgpl',
    dist_author   => "Dominique Dumont (ddumont at cpan dot org)",
-   dist_abstract => "Xorg configuration tool based on Config::Model",
-   requires      => {
-		     'Config::Model'   => '0.637',
-		     'Log::Log4perl'   => 0 ,
-		    },
-   recommends    => {
-		     'Config::Model::CursesUI' => 0,
-		     'Config::Model::TkUI'     => 0,
-		    },
-   add_to_cleanup => [qw/wr_test/] 
+   dist_abstract => "Xorg configuration editor and validator",
+
+  'build_requires' => {
+    'Module::Build' => '0.34',
+    'Test::Exception' => '0',
+    'Test::More' => '0'
+  },
+  'configure_requires' => {
+    'Module::Build' => '0.34'
+  },
+  'recommends' => {
+    'Config::Model::CursesUI' => '0',
+    'Config::Model::TkUI' => '0'
+  },
+  'requires' => {
+    'Config::Model' => '1.260',
+    'Exception::Class' => '0',
+    'Log::Log4perl' => '1.11'
+  },
+
+    meta_merge => {
+        resources => {
+            homepage => 'http://config-model.wiki.sourceforge.net',
+            MailingList =>
+              'https://lists.sourceforge.net/lists/listinfo/config-model-users',
+            repository =>
+              'http://config-model.hg.sourceforge.net:8000/hgroot/config-model/config-model',
+        },
+    },
+
+   add_to_cleanup => [qw/wr_root/] 
   );
 
 
@@ -103,24 +129,21 @@ my $generator = "Config::Model Build.PL" ;
 
 my $model_dir = "lib/Config/Model/models";
 
-my $xorg_config_file_model 
-  = [ 
-     [
-      name => 'Xorg::ConfigDir',
-      generated_by => $generator ,
-      read_config => [ { backend => 'custom',
-			 class => 'Config::Model::Xorg::Read', 
-			 config_dir => $etc_xorg_dir ,
-		       }
-		     ] ,
-      write_config => [ { backend => 'custom',
-			  class => 'Config::Model::Xorg::Write', 
-			  config_dir => $etc_xorg_dir ,
-			}
-		      ] ,
-
-     ]
-    ] ;
+my $xorg_config_file_model = [ 
+    [
+        name => 'Xorg::ConfigDir',
+        class_description => "Class used to tune location of xorg.conf which is not always in /etc/X11.",
+        generated_by => $generator ,
+        read_config => [ 
+            { 
+                backend => 'Xorg',
+                file => 'xorg.conf',    
+                config_dir => $etc_xorg_dir ,
+                auto_create => 1,
+            }
+        ] ,
+    ]
+] ;
 
 generate($build, "$model_dir/Xorg/ConfigDir.pl", $xorg_config_file_model) ;
 

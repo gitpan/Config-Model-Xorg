@@ -1,90 +1,25 @@
-# $Author: ddumont $
-# $Date: 2009-03-17 14:12:03 +0100 (Tue, 17 Mar 2009) $
-# $Revision: 899 $
+#
+# This file is part of Config-Model-Xorg
+#
+# This software is Copyright (c) 2011 by Dominique Dumont.
+#
+# This is free software, licensed under:
+#
+#   The GNU Lesser General Public License, Version 2.1, February 1999
+#
+package Config::Model::Backend::Xorg::Read ;
+{
+  $Config::Model::Backend::Xorg::Read::VERSION = '1.105';
+}
 
-#    Copyright (c) 2005-2009 Dominique Dumont.
-#
-#    This file is part of Config-Xorg.
-#
-#    Config-Xorg is free software; you can redistribute it and/or
-#    modify it under the terms of the GNU Lesser Public License as
-#    published by the Free Software Foundation; either version 2.1 of
-#    the License, or (at your option) any later version.
-#
-#    Config-Xorg is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-#    Lesser Public License for more details.
-#
-#    You should have received a copy of the GNU Lesser Public License
-#    along with Config-Model; if not, write to the Free Software
-#    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+use Any::Moose 'Role';
 
-package Config::Model::Xorg::Read ;
-
-use strict;
-use warnings ;
 use Carp ;
 use IO::File ;
 use Log::Log4perl;
 use Data::Dumper ;
 
-use vars qw($VERSION) ;
-
-$VERSION = sprintf "1.%04d", q$Revision: 899 $ =~ /(\d+)/;
-
-my $logger = Log::Log4perl::get_logger(__PACKAGE__);
-
-sub read {
-    my %args = @_ ;
-    my $config_root = $args{object}
-      || croak __PACKAGE__," read: undefined config root object";
-    my $conf_dir = $args{config_dir} 
-      || croak __PACKAGE__," read: undefined config_dir";
-    my $root = $args{root} || '';
-    my $test = $args{test} || 0;
-
-    my $dir = join('/',$root,$conf_dir) ;
-
-    unless (-d $dir ) {
-	warn __PACKAGE__," read: unknown config dir $dir";
-	return 0;
-    }
-
-    my $file = "$dir/xorg.conf" ;
-    unless (-r "$file") {
-	warn __PACKAGE__," read: unknown file $file";
-	return 0;
-    }
-
-    my $i = $config_root->instance ;
-
-    $logger->info("loading config file $file");
-
-    my $fh = new IO::File $file, "r" ;
-
-    if (defined $fh) {
-	my @file = $fh->getlines ;
-	$fh->close;
-	my $idx = 0 ;
-	# store also input line number
-	map {s/#.*$//; s/^\s*//; s/\s+$//; $_ = [ "line ".$idx++ ,$_ ]} @file ;
-	my @raw_xorg_conf = grep { $_->[1] !~ /^\s*$/ ;} @file;
-	chomp @raw_xorg_conf ;
-
-	#print Dumper(\@raw_xorg_conf); exit ;
-	my $data = parse_raw_xorg(\@raw_xorg_conf) ;
-
-	return $data if $test ;
-	#print Dumper($data); exit ;
-
-	parse_all($data, $config_root) ;
-	return 1 ;
-    }
-    else {
-	die __PACKAGE__," read: can't open $file:$!";
-    }
-}
+my $logger = Log::Log4perl::get_logger('Backend::Xorg::Read');
 
 # return a data structure in the form :
 #   hash_ref->array_ref->hash_ref->array_ref
@@ -479,4 +414,5 @@ sub parse_section {
 	}
     }
 }
+
 1;
