@@ -9,7 +9,7 @@
 #
 package Config::Model::Backend::Xorg::Read ;
 {
-  $Config::Model::Backend::Xorg::Read::VERSION = '1.105';
+  $Config::Model::Backend::Xorg::Read::VERSION = '1.106';
 }
 
 use Any::Moose 'Role';

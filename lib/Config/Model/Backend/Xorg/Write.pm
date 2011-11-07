@@ -10,7 +10,7 @@
 
 package Config::Model::Backend::Xorg::Write ;
 {
-  $Config::Model::Backend::Xorg::Write::VERSION = '1.105';
+  $Config::Model::Backend::Xorg::Write::VERSION = '1.106';
 }
 
 use Any::Moose 'Role' ;

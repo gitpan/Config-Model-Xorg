@@ -10,7 +10,7 @@
 
 package Config::Model::Xorg ;
 {
-  $Config::Model::Xorg::VERSION = '1.105';
+  $Config::Model::Xorg::VERSION = '1.106';
 }
 
 # dummy package so CPAN can collect information regarding this module
@@ -25,7 +25,7 @@ Config::Model::Xorg - Xorg configuration model for Config::Model
 
 =head1 VERSION
 
-version 1.105
+version 1.106
 
 =head1 SYNOPSIS
 

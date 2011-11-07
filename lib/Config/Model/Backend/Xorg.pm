@@ -9,7 +9,7 @@
 #
 package Config::Model::Backend::Xorg ;
 {
-  $Config::Model::Backend::Xorg::VERSION = '1.105';
+  $Config::Model::Backend::Xorg::VERSION = '1.106';
 }
 use Any::Moose ;
 use Carp ;
@@ -94,26 +94,22 @@ __END__
 
 =head1 NAME
 
-Config::Model::Backend::Xorg - Read and write config from fstab file
+Config::Model::Backend::Xorg - Read and write config from xorg.conf file
 
 =head1 VERSION
 
-version 1.105
+version 1.106
 
 =head1 SYNOPSIS
 
-No synopsis. This class is dedicated to configuration class C<Fstab>
+No synopsis. This class is dedicated to C<Xorg> configuration class.
 
 =head1 DESCRIPTION
 
 This module is used directly by L<Config::Model> to read or write the
-content of a configuration tree written with C<fstab> syntax in
-C<Config::Model> configuration tree. Typically this backend will 
-be used to read and write C</etc/fstab>.
-
-=head1 Comments in file_path
-
-This backend is able to read and write comments in the C</etc/fstab> file.
+content of a configuration tree written with C<xorg> syntax in
+a C<Config::Model> configuration tree. Typically this backend will 
+be used to read and write C</etc/X11/xorg.conf>.
 
 =head1 STOP
 
@@ -131,7 +127,7 @@ called by L<Config::Model::AutoRead>.
 
 Of all parameters passed to this read call-back, only C<io_handle> is
 used. This parameter must be L<IO::File> object already opened for
-read. 
+read.
 
 It can also be undef. In this case, C<read()> will return 0.
 
@@ -141,7 +137,7 @@ When a file is read,  C<read()> will return 1.
 
 Of all parameters passed to this write call-back, only C<io_handle> is
 used. This parameter must be L<IO::File> object already opened for
-write. 
+write.
 
 C<write()> will return 1.
 
@@ -152,7 +148,10 @@ Dominique Dumont, (ddumont at cpan dot org)
 =head1 SEE ALSO
 
 L<Config::Model>, 
-L<Config::Model::AutoRead>, 
+L<Config::Model::BackendMgr>, 
 L<Config::Model::Backend::Any>, 
+L<Config::Model::Backend::Xorg::Read>, 
+L<Config::Model::Backend::Xorg::Write>, 
+
 
 =cut
